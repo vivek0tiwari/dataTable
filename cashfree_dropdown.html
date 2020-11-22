@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        .dropdown{
+            display: flex;
+            flex-direction: column;
+            max-width: 100px;
+            margin: 10px;
+        }
+        .dropdown button{
+            cursor: pointer;
+            color: #fff;
+            background-color: #007bff;
+            border: 1px solid #007bff;
+            flex: 0 1 auto;
+            padding: .75rem .50rem;
+        }
+        .dropdown ul{
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        .dropdown ul li {
+            border: solid 1px rgb(202, 202, 202);
+        }
+        .dropdown ul li:hover {
+            border: solid 1px rgb(176, 173, 173);
+            background-color: rgb(200, 195, 205);
+        }
+        .closed {
+            display: none;
+        }
+    </style>
+<body>
+
+    <div class='dropdown'>
+        <button>Select</button>
+        <ul>
+        <li>List 1</li>
+        <li>List 2</li>
+        </ul>
+    </div>
+    <div class='dropdown'>
+        <button>Select</button>
+        <ul>
+        <li>List 1</li>
+        <li>List 2</li>
+        <li>List 2</li>
+        <li>List 2</li>
+        <li>List 2</li>
+        </ul>
+    </div>
+    <div class='dropdown'>
+        <button>Select</button>
+        <ul>
+        <li>List 1</li>
+        <li>List 2</li>
+        <li>List 1</li>
+        <li>List 1</li>
+        </ul>
+    </div>
+
+
+</body>
+<script>
+    // let container = document.getElementsByClassName('dropdown');
+    // debugger
+    // console.log(container)
+    let isOpened = false
+    const selectedValue = ''
+    let dropdowns = document.querySelectorAll('.dropdown')
+    function toggle(e, ul){
+        e.stopPropagation();
+        if(ul.classList.contains('closed')){
+            ul.classList.remove('closed')    
+        }else{
+            ul.classList.add('closed')
+        }
+        
+    }
+    
+    function onChange(e, button){
+        button.innerHTML = e.target.innerHTML
+    }
+    // console.log(dropdown.nextSibling)
+    window.addEventListener("DOMContentLoaded",function(){
+        dropdowns.forEach(dd=>{
+            const button = dd.firstElementChild
+            const ul = dd.children[1]
+             ul.classList.add('closed')
+            button.addEventListener('click', function(e){
+                toggle(e, ul)
+            }, true)
+            ul.addEventListener('click', function(e){
+                onChange(e, button)
+            }, true)
+        })
+    });
+    window.onclick=function(event){
+        dropdowns.forEach(dd=>{
+            const ul = dd.children[1]
+             ul.classList.add('closed')
+        })
+    };
+</script>
+</html> 
